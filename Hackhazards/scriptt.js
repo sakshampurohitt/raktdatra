@@ -1,18 +1,16 @@
-const firebaseConfig = {
-  apiKey: "AIzaSyCUNI-_OJ3IVgsVTbFOSevlryqU9y06S2o",
-  authDomain: "raktdatra-c962d.firebaseapp.com",
-  databaseURL: "https://raktdatra-c962d-default-rtdb.firebaseio.com",
-  projectId: "raktdatra-c962d",
-  storageBucket: "raktdatra-c962d.appspot.com",
-  messagingSenderId: "441675400427",
-  appId: "1:441675400427:web:66ece224edf7d1287e6aae"
-};
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+
+const appsetting = {
+    databaseURL: "https://playground-62ca5-default-rtdb.asia-southeast1.firebasedatabase.app"
+}
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const app = initializeApp(appsetting);
 
 // Reference your user database
-var userDB = firebase.database().ref("users");
+const database = getDatabase(app);
+const itemindb = ref(database, "items");
 
 document.getElementById("signup-form").addEventListener("submit", submitForm);
 
@@ -46,9 +44,9 @@ function submitForm(e) {
 }
 
 const saveUser = (name, email, phone, password, gender, dob, role, bloodGroup, location, medicalRecords, additionalInfo) => {
-  var newUser = userDB.push();
+  const newUserRef = push(itemindb);
 
-  newUser.set({
+  set(newUserRef, {
     name: name,
     email: email,
     phone: phone,
